@@ -9,6 +9,7 @@ chai.use(sinonChai);
 var main = require("../lib/main.js");
 var wrong_num_list =[3,7,7];
 var wrong_zero_list =[3,0,7];
+var num_list =[3,5,7];
 
 describe("测试描述", function(){
     sinon.spy(console, 'log');
@@ -26,5 +27,18 @@ describe("测试描述", function(){
         var expect_string = 'wrong_zero';
         expect(expect_string).to.equal(result);
     });
+
+    it("case2_multiple_one", function(){
+
+        var result = main(6,num_list);
+        var expect_string = '1\n'
+            + '2\n'
+            + 'Fizz\n'
+            + '4\n'
+            + 'Buzz\n'
+            + 'Fizz\n';
+        expect(expect_string).to.equal(result);
+    });
+
 
 });
