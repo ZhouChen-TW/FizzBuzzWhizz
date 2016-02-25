@@ -7,24 +7,15 @@ var expect = chai.expect;
 chai.use(sinonChai);
 
 var main = require("../lib/main.js");
+var num_list =[3,7,7];
 
 describe("测试描述", function(){
     sinon.spy(console, 'log');
 
-    it("测试用例1", function(){
+    it("case1_wrong_input", function(){
 
-        var result = main(2,2);
-        var expect_string = '4';
-
-        expect(expect_string).to.equal(result);
-    });
-
-    it("测试用例2", function(){
-
-        main();
-        var result = _.flatten(console.log.args).join("\n");
-        var expect_string = '';
-
+        var result = main(3,num_list);
+        var expect_string = 'wrong input';
         expect(expect_string).to.equal(result);
     });
 
