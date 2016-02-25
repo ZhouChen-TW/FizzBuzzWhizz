@@ -55,5 +55,11 @@ input :A,B,C
         6）输入B，C的倍数
         7）输入A，B，C的倍数
         8）含有输入A的数
+        
+        
+遗留问题：
+1）data-driven使用
+2）mork,spy,stub使用
+3）代码简洁
          
     
