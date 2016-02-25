@@ -76,5 +76,26 @@ describe("测试描述", function(){
         expect(expect_string).to.equal(result);
     });
 
+    it("case3_multiple_one_two", function(){
+
+        var result = main(15,num_list);
+        var expect_string = '1\n'
+            + '2\n'
+            + 'Fizz\n'
+            + '4\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'Whizz\n'
+            + '8\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + '11\n'
+            + 'Fizz\n'
+            + 'Fizz\n'
+            + 'Whizz\n'
+            + 'FizzBuzz\n';
+        expect(expect_string).to.equal(result);
+    });
+
 
 });
