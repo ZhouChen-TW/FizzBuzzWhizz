@@ -10,6 +10,7 @@ var main = require("../lib/main.js");
 var wrong_num_list =[3,7,7];
 var wrong_zero_list =[3,0,7];
 var num_list =[3,5,7];
+var num_list_second =[3,2,5];
 
 describe("测试描述", function(){
     sinon.spy(console, 'log');
@@ -165,7 +166,43 @@ describe("测试描述", function(){
         expect(expect_string).to.equal(result);
     });
 
-    it("case4_contains_one", function(){
+    it("case4_multiple_one_two_three", function(){
+
+        var result = main(30,num_list_second);
+        var expect_string = '1\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + 'Whizz\n'
+            + 'FizzBuzz\n'
+            + '7\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'BuzzWhizz\n'
+            + '11\n'
+            + 'FizzBuzz\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + 'FizzWhizz\n'
+            + 'Buzz\n'
+            + '17\n'
+            + 'FizzBuzz\n'
+            + '19\n'
+            + 'BuzzWhizz\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'FizzBuzz\n'
+            + 'Whizz\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + '29\n'
+            + 'Fizz\n';
+        expect(expect_string).to.equal(result);
+    });
+
+    it("case3_contains_one", function(){
 
         var result = main(23,num_list);
         var expect_string = '1\n'
