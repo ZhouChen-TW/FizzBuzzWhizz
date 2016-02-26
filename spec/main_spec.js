@@ -37,6 +37,13 @@ describe("测试描述", function(){
         expect(expect_string).to.equal(result);
     });
 
+    it("case1_wrong_max", function(){
+
+        var result = main(105,num_list);
+        var expect_string = 'wrong_max,max should less then 100';
+        expect(expect_string).to.equal(result);
+    });
+
     it("case2_multiple_one", function(){
 
         var result = main(6,num_list);
