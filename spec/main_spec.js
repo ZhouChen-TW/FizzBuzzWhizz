@@ -9,6 +9,7 @@ chai.use(sinonChai);
 var main = require("../lib/main.js");
 var wrong_num_list =[3,7,7];
 var wrong_zero_list =[3,0,7];
+var wrong_more_list=[3,2,5,7];
 var num_list =[3,5,7];
 var num_list_second =[3,2,5];
 
@@ -26,6 +27,13 @@ describe("测试描述", function(){
 
         var result = main(3,wrong_zero_list);
         var expect_string = 'wrong_zero';
+        expect(expect_string).to.equal(result);
+    });
+
+    it("case1_wrong_more", function(){
+
+        var result = main(3,wrong_more_list);
+        var expect_string = 'wrong_more';
         expect(expect_string).to.equal(result);
     });
 
@@ -166,6 +174,35 @@ describe("测试描述", function(){
         expect(expect_string).to.equal(result);
     });
 
+    it("case3_contains_one", function(){
+
+        var result = main(23,num_list);
+        var expect_string = '1\n'
+            + '2\n'
+            + 'Fizz\n'
+            + '4\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'Whizz\n'
+            + '8\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + '11\n'
+            + 'Fizz\n'
+            + 'Fizz\n'
+            + 'Whizz\n'
+            + 'FizzBuzz\n'
+            + '16\n'
+            + '17\n'
+            + 'Fizz\n'
+            + '19\n'
+            + 'Buzz\n'
+            + 'FizzWhizz\n'
+            + '22\n'
+            + 'Fizz\n';
+        expect(expect_string).to.equal(result);
+    });
+
     it("case4_multiple_one_two_three", function(){
 
         var result = main(30,num_list_second);
@@ -198,35 +235,6 @@ describe("测试描述", function(){
             + 'Fizz\n'
             + 'Buzz\n'
             + '29\n'
-            + 'Fizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case3_contains_one", function(){
-
-        var result = main(23,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n'
-            + 'Fizz\n'
-            + '19\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n'
-            + '22\n'
             + 'Fizz\n';
         expect(expect_string).to.equal(result);
     });
