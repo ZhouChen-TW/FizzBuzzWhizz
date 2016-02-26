@@ -6,392 +6,126 @@ var sinonChai = require("sinon-chai");
 var expect = chai.expect;
 chai.use(sinonChai);
 
-var main = require("../lib/main.js");
+var fizzbuzzwhizz=require("../lib/main.js");
 var wrong_num_list =[3,7,7];
 var wrong_zero_list =[3,0,7];
 var wrong_more_list=[3,2,5,7];
 var num_list =[3,5,7];
-var num_list_second =[3,2,5];
+var num_list_second =[2,3,5];
 var num_contains_multipe =[3,2,4];
 
-describe("测试描述", function(){
-    sinon.spy(console, 'log');
+describe("fizzbuzzwhizz", function(){
+    describe("getflag", function() {
+        it("case1_wrong_input", function(){
+            expect(1).to.equal(fizzbuzzwhizz(3,wrong_num_list).getflag(3,wrong_num_list));
+        });
 
-    it("case1_wrong_input", function(){
+        it("case1_wrong_zero", function(){
+            expect(2).to.equal(fizzbuzzwhizz(3,wrong_zero_list).getflag(3,wrong_zero_list));
+        });
 
-        var result = main(3,wrong_num_list);
-        var expect_string = 'wrong input';
-        expect(expect_string).to.equal(result);
+        it("case1_wrong_more", function(){
+            expect(3).to.equal(fizzbuzzwhizz(3,wrong_more_list).getflag(3,wrong_more_list));
+        });
+
+        it("case1_wrong_max", function(){
+            expect(4).to.equal(fizzbuzzwhizz(105,num_list).getflag(105,num_list));
+        });
     });
 
-    it("case1_wrong_zero", function(){
+    var fizzbuzz = fizzbuzzwhizz(100,num_list);
+    describe("getOperation", function() {
+        it("should return Fizz when input is one's multiple", function() {
+            expect("Fizz").to.equal(fizzbuzz.getOperation(3));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(6));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(9));
+        });
 
-        var result = main(3,wrong_zero_list);
-        var expect_string = 'wrong_zero';
-        expect(expect_string).to.equal(result);
+        it("should return Buzz when input is two's multiple", function() {
+            expect("Buzz").to.equal(fizzbuzz.getOperation(5));
+            expect("Buzz").to.equal(fizzbuzz.getOperation(10));
+            expect("Buzz").to.equal(fizzbuzz.getOperation(20));
+        });
+
+        it("should return Whizz when input is three's multiple", function() {
+            expect("Whizz").to.equal(fizzbuzz.getOperation(7));
+            expect("Whizz").to.equal(fizzbuzz.getOperation(14));
+            expect("Whizz").to.equal(fizzbuzz.getOperation(28));
+        });
+
+        it("should return FizzBuzz when input is one_two's multiple", function() {
+            expect("FizzBuzz").to.equal(fizzbuzz.getOperation(15));
+            expect("FizzBuzz").to.equal(fizzbuzz.getOperation(90));
+        });
+
+        it("should return FizzWhizz when input is one_three's multiple", function() {
+            expect("FizzWhizz").to.equal(fizzbuzz.getOperation(21));
+            expect("FizzWhizz").to.equal(fizzbuzz.getOperation(42));
+        });
+
+        it("should return BuzzWhizz when input is two_three's multiple", function() {
+            expect("BuzzWhizz").to.equal(fizzbuzz.getOperation(70));
+        });
+
+        it("should return FizzBuzzWhizz when input is one_two_three's multiple", function() {
+            expect("FizzBuzzWhizz").to.equal(fizzbuzzwhizz(30,num_list_second).getOperation(30));
+        });
+
+        it("should return Fizz when input contains one", function() {
+            expect("Fizz").to.equal(fizzbuzz.getOperation(13));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(23));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(30));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(31));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(32));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(33));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(34));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(35));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(36));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(37));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(38));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(39));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(43));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(53));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(63));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(73));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(83));
+            expect("Fizz").to.equal(fizzbuzz.getOperation(93));
+        });
+
+        it("should return oneself when input is not belong to the rules", function() {
+            expect('1').to.equal(fizzbuzz.getOperation(1));
+            expect('2').to.equal(fizzbuzz.getOperation(2));
+            expect('4').to.equal(fizzbuzz.getOperation(4));
+            expect('8').to.equal(fizzbuzz.getOperation(8));
+            expect('11').to.equal(fizzbuzz.getOperation(11));
+            expect('16').to.equal(fizzbuzz.getOperation(16));
+            expect('17').to.equal(fizzbuzz.getOperation(17));
+            expect('19').to.equal(fizzbuzz.getOperation(19));
+            expect('22').to.equal(fizzbuzz.getOperation(22));
+            expect('26').to.equal(fizzbuzz.getOperation(26));
+            expect('29').to.equal(fizzbuzz.getOperation(29));
+        });
+
     });
 
-    it("case1_wrong_more", function(){
+    describe("getall", function() {
 
-        var result = main(3,wrong_more_list);
-        var expect_string = 'wrong_more';
-        expect(expect_string).to.equal(result);
+        it("should return the correct when the maxlength is 17", function() {
+            var result = '1\n2\nFizz\n4\nBuzz\nFizz\nWhizz\n8\nFizz\nBuzz\n11\nFizz\nFizz\nWhizz\nFizzBuzz\n16\n17\n';
+            expect(fizzbuzz.getall(17)).to.equal(result);
+        });
+
+        it("should return the correct when the input has multiple", function() {
+            var result = '1\nBuzz\nFizz\nBuzzWhizz\n5\nFizzBuzz\n7\nBuzzWhizz\nFizz\nBuzz\n11\nFizzBuzzWhizz\n';
+            expect(fizzbuzzwhizz(12,num_contains_multipe).getall(12)).to.equal(result);
+        });
+
     });
 
-    it("case1_wrong_max", function(){
-
-        var result = main(105,num_list);
-        var expect_string = 'wrong_max,max should less then 100';
-        expect(expect_string).to.equal(result);
+    describe("main : should call with 100 and console.log result", function() {
+        sinon.spy(console, 'log');
+        var mainresult = sinon.spy(fizzbuzz, "getall");
+        fizzbuzz.main();
+        expect(mainresult).to.have.been.calledWith(100);
     });
-
-    it("case2_multiple_one", function(){
-
-        var result = main(6,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case2_multiple_two", function(){
-
-        var result = main(10,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case2_multiple_three", function(){
-
-        var result = main(14,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case3_multiple_one_two", function(){
-
-        var result = main(15,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case3_multiple_one_three", function(){
-
-        var result = main(21,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n'
-            + 'Fizz\n'
-            + '19\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case3_multiple_two_three", function(){
-
-        var result = main(35,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n'
-            + 'Fizz\n'
-            + '19\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n'
-            + '22\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '26\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '29\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case3_contains_one", function(){
-
-        var result = main(23,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n'
-            + 'Fizz\n'
-            + '19\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n'
-            + '22\n'
-            + 'Fizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case4_multiple_one_two_three", function(){
-
-        var result = main(30,num_list_second);
-        var expect_string = '1\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '7\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'BuzzWhizz\n'
-            + '11\n'
-            + 'FizzBuzz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n'
-            + 'Buzz\n'
-            + '17\n'
-            + 'FizzBuzz\n'
-            + '19\n'
-            + 'BuzzWhizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'FizzBuzz\n'
-            + 'Whizz\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '29\n'
-            + 'Fizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case4_other", function(){
-
-        var result = main(17,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case5_one_hundred", function(){
-
-        var result = main(100,num_list);
-        var expect_string = '1\n'
-            + '2\n'
-            + 'Fizz\n'
-            + '4\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '8\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'FizzBuzz\n'
-            + '16\n'
-            + '17\n'
-            + 'Fizz\n'
-            + '19\n'
-            + 'Buzz\n'
-            + 'FizzWhizz\n'
-            + '22\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '26\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + '29\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '41\n'
-            + 'FizzWhizz\n'
-            + 'Fizz\n'
-            + '44\n'
-            + 'FizzBuzz\n'
-            + '46\n'
-            + '47\n'
-            + 'Fizz\n'
-            + 'Whizz\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + '52\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + 'Whizz\n'
-            + 'Fizz\n'
-            + '58\n'
-            + '59\n'
-            + 'FizzBuzz\n'
-            + '61\n'
-            + '62\n'
-            + 'Fizz\n'
-            + '64\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + '67\n'
-            + '68\n'
-            + 'Fizz\n'
-            + 'BuzzWhizz\n'
-            + '71\n'
-            + 'Fizz\n'
-            + 'Fizz\n'
-            + '74\n'
-            + 'FizzBuzz\n'
-            + '76\n'
-            + 'Whizz\n'
-            + 'Fizz\n'
-            + '79\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + '82\n'
-            + 'Fizz\n'
-            + 'FizzWhizz\n'
-            + 'Buzz\n'
-            + '86\n'
-            + 'Fizz\n'
-            + '88\n'
-            + '89\n'
-            + 'FizzBuzz\n'
-            + 'Whizz\n'
-            + '92\n'
-            + 'Fizz\n'
-            + '94\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + '97\n'
-            + 'Whizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n';
-        expect(expect_string).to.equal(result);
-    });
-
-    it("case6_contains_multiple", function(){
-
-        var result = main(12,num_contains_multipe);
-        var expect_string = '1\n'
-            + 'Buzz\n'
-            + 'Fizz\n'
-            + 'BuzzWhizz\n'
-            + '5\n'
-            + 'FizzBuzz\n'
-            + '7\n'
-            + 'BuzzWhizz\n'
-            + 'Fizz\n'
-            + 'Buzz\n'
-            + '11\n' 
-            + 'FizzBuzzWhizz\n';
-        expect(expect_string).to.equal(result);
-    });
-
 });
