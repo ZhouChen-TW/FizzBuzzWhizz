@@ -12,6 +12,7 @@ var wrong_zero_list =[3,0,7];
 var wrong_more_list=[3,2,5,7];
 var num_list =[3,5,7];
 var num_list_second =[3,2,5];
+var num_contains_multipe =[3,2,4];
 
 describe("测试描述", function(){
     sinon.spy(console, 'log');
@@ -372,6 +373,24 @@ describe("测试描述", function(){
             + 'Whizz\n'
             + 'Fizz\n'
             + 'Buzz\n';
+        expect(expect_string).to.equal(result);
+    });
+
+    it("case6_contains_multiple", function(){
+
+        var result = main(12,num_contains_multipe);
+        var expect_string = '1\n'
+            + 'Buzz\n'
+            + 'Fizz\n'
+            + 'BuzzWhizz\n'
+            + '5\n'
+            + 'FizzBuzz\n'
+            + '7\n'
+            + 'BuzzWhizz\n'
+            + 'Fizz\n'
+            + 'Buzz\n'
+            + '11\n' 
+            + 'FizzBuzzWhizz\n';
         expect(expect_string).to.equal(result);
     });
 
